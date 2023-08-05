@@ -1,0 +1,64 @@
+<%@page import="com.jsp.mvcjpa.entity.Emp"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid black;
+    }
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+</style>
+</head>
+<body>
+<center>
+	<form action="displayInfo">
+	<input placeholder="Enter employee deptNo" name="dept" type="number">
+	<br><br>
+	<input type="submit" value="Display">
+	</form>
+	</center>
+	<table>
+    <tr>
+        <th>Emp id</th>
+        <th>Emp name</th>
+        <th>Salary</th>
+        <th>Dept NO</th>
+    </tr>
+	<%
+	String message=(String)request.getAttribute("msg");
+	List<Emp> resultList=(List)request.getAttribute("result");
+	if(message!=null)
+	{
+	%>
+	<h1><%=message %></h1>
+	<%}
+		if(resultList!=null)
+		{
+			for(Emp emp:resultList)
+			{
+		
+	%>
+	
+    <tr>
+        <td><%= emp.getEmpid() %></td>
+        <td><%= emp.getEname() %></td>
+        <td><%= emp.getSal() %></td>
+        <td><%= emp.getDeptno() %></td>
+    </tr>
+	<%}
+}%>
+	
+	</table>
+</body>
+</html>
